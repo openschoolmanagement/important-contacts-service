@@ -13,16 +13,26 @@
    See the License for the specific language governing permissions and
    limitations under the License.
  */
+package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
-package open.schoolmanagement.contacts.importantcontactsservice;
+import lombok.Builder;
+import lombok.Getter;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import javax.persistence.*;
 
-@SpringBootApplication
-public class ImportantContactsServiceApplication {
+@Builder
+@Entity
+@Table(name = "email_address")
+public class EmailAddress {
+  @Getter
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Contact contact;
 
-	public static void main(String[] args) {
-		SpringApplication.run(ImportantContactsServiceApplication.class, args);
-	}
+  @Getter
+  @Column(name = "category")
+  private String category;
+
+  @Getter
+  @OneToOne(fetch = FetchType.LAZY)
+  private String emailAddress;
 }
