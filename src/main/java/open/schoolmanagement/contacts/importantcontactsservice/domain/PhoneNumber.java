@@ -26,6 +26,7 @@ import javax.persistence.*;
 public class PhoneNumber {
   @Getter
   @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "contact_id")
   private Contact contact;
 
   @Getter
@@ -33,6 +34,6 @@ public class PhoneNumber {
   private String category;
 
   @Getter
-  @OneToOne(fetch = FetchType.LAZY)
+  @Column(name = "phone_number")
   private String phoneNumber;
 }

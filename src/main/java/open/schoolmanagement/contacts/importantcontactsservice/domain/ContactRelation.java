@@ -26,6 +26,7 @@ import javax.persistence.*;
 public class ContactRelation {
   @Getter
   @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "contact_id")
   private Contact contact;
 
   @Getter
@@ -34,5 +35,6 @@ public class ContactRelation {
 
   @Getter
   @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "contact_id")
   private Contact relatedContact;
 }

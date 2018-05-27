@@ -30,11 +30,20 @@ public class Contact {
   @Getter
   @Id
   @GeneratedValue
+  @Column(name = "contact_id")
   private UUID id;
 
   @Getter
   @Column(name = "company")
   private String company;
+
+  @Getter
+  @Column(name = "salutation")
+  private String salutation;
+
+  @Getter
+  @Column(name = "academic_title")
+  private String academicTitle;
 
   @Getter
   @Column(name = "firstname")
@@ -69,14 +78,27 @@ public class Contact {
   private String country;
 
   @Getter
-  @OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
+  @Column(name = "notes", length = 4096)
+  private String notes;
+
+  @Getter
+  @OneToMany(mappedBy = "contact",
+      fetch = FetchType.LAZY,
+      cascade = CascadeType.ALL,
+      orphanRemoval = true)
   private Collection<EmailAddress> emailAddresses;
 
   @Getter
-  @OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "contact",
+      fetch = FetchType.LAZY,
+      cascade = CascadeType.ALL,
+      orphanRemoval = true)
   private Collection<PhoneNumber> phoneNumbers;
 
   @Getter
-  @OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "contact",
+      fetch = FetchType.LAZY,
+      cascade = CascadeType.ALL,
+      orphanRemoval = true)
   private Collection<ContactRelation> relatedContacts;
 }
