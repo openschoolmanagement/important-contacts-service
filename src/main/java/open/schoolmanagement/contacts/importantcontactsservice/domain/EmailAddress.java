@@ -24,6 +24,9 @@ import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * An email address of a contact.
+ */
 @Builder
 @Entity
 @Table(name = "email_address")

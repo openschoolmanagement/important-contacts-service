@@ -24,7 +24,9 @@ import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 
-
+/**
+ * A Phone number of a contact.
+ */
 @Builder
 @Entity
 @Table(name = "phone_number")

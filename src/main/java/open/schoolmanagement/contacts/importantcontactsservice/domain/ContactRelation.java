@@ -25,7 +25,9 @@ import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 
-
+/**
+ * A ralation between two contacts.
+ */
 @Builder
 @Entity
 @Table(name = "contact_relation")

@@ -28,20 +28,23 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
+import open.schoolmanagement.contacts.importantcontactsservice.domain.interfaces.Organization;
+import open.schoolmanagement.contacts.importantcontactsservice.domain.interfaces.Person;
 
+/**
+ * A Contact.
+ */
 @Builder
 @Entity
 @Table(name = "contact")
-public class Contact {
-  @Getter
+public class Contact implements Person, Organization {
   @Id
   @GeneratedValue
   @Column(name = "contact_id")
-  private UUID id;
+  private UUID contactId;
 
-  @Getter
-  @Column(name = "company")
-  private String company;
+  @Column(name = "organization")
+  private String organization;
 
   @Getter
   @Column(name = "salutation")
@@ -51,15 +54,12 @@ public class Contact {
   @Column(name = "academic_title")
   private String academicTitle;
 
-  @Getter
   @Column(name = "firstname")
   private String firstname;
 
-  @Getter
   @Column(name = "middlenames")
   private String middlenames;
 
-  @Getter
   @Column(name = "lastname")
   private String lastname;
 
@@ -107,4 +107,29 @@ public class Contact {
       cascade = CascadeType.ALL,
       orphanRemoval = true)
   private Collection<ContactRelation> relatedContacts;
+
+  @Override
+  public UUID getContactId() {
+    return contactId;
+  }
+
+  @Override
+  public String getOrganization() {
+    return organization;
+  }
+
+  @Override
+  public String getFirstname() {
+    return firstname;
+  }
+
+  @Override
+  public String getMiddlenames() {
+    return middlenames;
+  }
+
+  @Override
+  public String getLastname() {
+    return lastname;
+  }
 }
