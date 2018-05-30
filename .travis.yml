@@ -3,6 +3,4 @@ jdk:
   - oraclejdk8
 
 script:
-  - ./mvnw validate
-  - ./mvnw test -B
-  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - ./mvnw validate test install -Dmaven.javadoc.skip=true -B -V
