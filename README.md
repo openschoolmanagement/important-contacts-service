@@ -2,7 +2,7 @@
 Spring Boot Service for Management of Important Contacts for School and Classes
 
 VCAP services:
-'''
+```javascript
 {
     "rabbitmq": {
         "hostname": "localhost",
@@ -34,5 +34,4 @@ VCAP services:
         "password": "pass",
     }
 }
-
-'''
+```
