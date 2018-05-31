@@ -1,7 +1,5 @@
 package open.schoolmanagement.contacts.importantcontactsservice.domain.interfaces;
 
-import java.util.UUID;
-
 /**
  * Access a contact as an Organization.
  */
@@ -11,7 +9,7 @@ public interface Organization {
    *
    * @return the contact id
    */
-  UUID getContactId();
+  Long getContactId();
 
   /**
    * Gets organization.

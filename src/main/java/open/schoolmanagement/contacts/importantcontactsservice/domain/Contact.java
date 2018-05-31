@@ -17,7 +17,6 @@
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
 import java.util.Collection;
-import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +29,7 @@ import lombok.Builder;
 import lombok.Getter;
 import open.schoolmanagement.contacts.importantcontactsservice.domain.interfaces.Organization;
 import open.schoolmanagement.contacts.importantcontactsservice.domain.interfaces.Person;
+import org.springframework.lang.NonNull;
 
 /**
  * A Contact.
@@ -40,8 +40,9 @@ import open.schoolmanagement.contacts.importantcontactsservice.domain.interfaces
 public class Contact implements Person, Organization {
   @Id
   @GeneratedValue
-  @Column(name = "contact_id")
-  private UUID contactId;
+  @Column(name = "contact_id", nullable = false)
+  @NonNull
+  private Long contactId;
 
   @Column(name = "organization")
   private String organization;
@@ -109,7 +110,7 @@ public class Contact implements Person, Organization {
   private Collection<ContactRelation> relatedContacts;
 
   @Override
-  public UUID getContactId() {
+  public Long getContactId() {
     return contactId;
   }
 

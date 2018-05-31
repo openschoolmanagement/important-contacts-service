@@ -1,7 +1,5 @@
 package open.schoolmanagement.contacts.importantcontactsservice.domain.interfaces;
 
-import java.util.UUID;
-
 /**
  * Access a Contact as a Person.
  */
@@ -11,7 +9,7 @@ public interface Person {
    *
    * @return the contact id
    */
-  UUID getContactId();
+  Long getContactId();
 
   /**
    * Gets firstname.
