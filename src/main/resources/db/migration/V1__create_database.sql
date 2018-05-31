@@ -17,7 +17,7 @@ CREATE TABLE contact(
 CREATE TABLE contact_relation (
     contact_relation_id BIGINT not null,
     origin_contact_id   BIGINT not null,
-    category            TEXT CHARACTER SET utf8,
+    relation_name       TEXT CHARACTER SET utf8,
     related_contact_id  BIGINT not null
 );
 

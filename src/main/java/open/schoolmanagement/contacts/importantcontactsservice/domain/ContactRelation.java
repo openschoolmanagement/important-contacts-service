@@ -48,8 +48,8 @@ public class ContactRelation {
   private Contact contact;
 
   @Getter
-  @Column(name = "category")
-  private String category;
+  @Column(name = "relation_name")
+  private String relationName;
 
   @Getter
   @OneToOne(fetch = FetchType.LAZY)
