@@ -19,6 +19,7 @@ package open.schoolmanagement.contacts.importantcontactsservice.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -33,6 +34,11 @@ import lombok.Getter;
 @Table(name = "email_address")
 public class EmailAddress {
   @Getter
+  @Column(name = "email_address")
+  @Id
+  private String emailAddress;
+
+  @Getter
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "contact_id")
   private Contact contact;
@@ -40,8 +46,4 @@ public class EmailAddress {
   @Getter
   @Column(name = "category")
   private String category;
-
-  @Getter
-  @Column(name = "email_address")
-  private String emailAddress;
 }

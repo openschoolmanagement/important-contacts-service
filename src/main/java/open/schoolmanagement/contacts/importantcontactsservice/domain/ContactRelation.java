@@ -16,9 +16,12 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -34,8 +37,14 @@ import lombok.Getter;
 @Table(name = "contact_relation")
 public class ContactRelation {
   @Getter
+  @Column(name = "contact_relation_id")
+  @GeneratedValue
+  @Id
+  private UUID id;
+
+  @Getter
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "contact_id")
+  @JoinColumn(name = "origin_contact_id")
   private Contact contact;
 
   @Getter
@@ -44,6 +53,6 @@ public class ContactRelation {
 
   @Getter
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "contact_id")
+  @JoinColumn(name = "related_contact_id")
   private Contact relatedContact;
 }

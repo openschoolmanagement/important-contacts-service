@@ -3,6 +3,7 @@ package open.schoolmanagement.contacts.importantcontactsservice.repository;
 import java.util.Collection;
 import java.util.UUID;
 import open.schoolmanagement.contacts.importantcontactsservice.domain.Contact;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -15,6 +16,7 @@ public interface ContactRepository extends CrudRepository<Contact, UUID> {
    * @param organization the organization to filter by
    * @return a collection with the contacts that match the organization
    */
+  @Query("SELECT c FROM Contact c where c.organization LIKE %?1")
   Collection<Contact> findContactsByOrganization(String organization);
 
   /**
@@ -25,5 +27,6 @@ public interface ContactRepository extends CrudRepository<Contact, UUID> {
    * @param lastname    the lastname
    * @return a collection with the contacts that match the given name
    */
+  @Query("SELECT c FROM Contact c where c.firstname LIKE %?1 AND c.middlenames LIKE %?2 AND c.lastname LIKE %?3")
   Collection<Contact> findContactsByName(String firstname, String middlenames, String lastname);
 }
