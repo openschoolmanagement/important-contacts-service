@@ -78,6 +78,11 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>5.1.1</version>
+        </dependency>
 
 		<!-- Supporting components -->
 		<dependency>
