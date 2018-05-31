@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Configuration of the data source
+ * Configuration of the data source.
  */
 @Configuration
 public class DataSourceConfig {
