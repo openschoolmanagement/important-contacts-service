@@ -16,6 +16,7 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
+import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,4 +56,20 @@ public class ContactRelation {
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "related_contact_id")
   private Contact relatedContact;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    ContactRelation that = (ContactRelation) o;
+    return Objects.equals(id, that.id) &&
+        Objects.equals(relationName, that.relationName);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, relationName);
+  }
 }

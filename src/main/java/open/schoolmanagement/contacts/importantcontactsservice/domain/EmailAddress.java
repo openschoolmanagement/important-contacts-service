@@ -16,6 +16,7 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,4 +47,21 @@ public class EmailAddress {
   @Getter
   @Column(name = "category")
   private String category;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    EmailAddress that = (EmailAddress) o;
+    return Objects.equals(emailAddress, that.emailAddress) &&
+        Objects.equals(category, that.category);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(emailAddress, category);
+  }
 }

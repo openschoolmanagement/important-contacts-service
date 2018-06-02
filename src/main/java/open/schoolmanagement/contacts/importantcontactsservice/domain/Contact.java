@@ -16,7 +16,8 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
-import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -93,21 +94,21 @@ public class Contact implements Person, Organization {
       fetch = FetchType.LAZY,
       cascade = CascadeType.ALL,
       orphanRemoval = true)
-  private Collection<EmailAddress> emailAddresses;
+  private Set<EmailAddress> emailAddresses;
 
   @Getter
   @OneToMany(mappedBy = "contact",
       fetch = FetchType.LAZY,
       cascade = CascadeType.ALL,
       orphanRemoval = true)
-  private Collection<PhoneNumber> phoneNumbers;
+  private Set<PhoneNumber> phoneNumbers;
 
   @Getter
   @OneToMany(mappedBy = "contact",
       fetch = FetchType.LAZY,
       cascade = CascadeType.ALL,
       orphanRemoval = true)
-  private Collection<ContactRelation> relatedContacts;
+  private Set<ContactRelation> relatedContacts;
 
   @Override
   public Long getContactId() {
@@ -132,5 +133,25 @@ public class Contact implements Person, Organization {
   @Override
   public String getLastname() {
     return lastname;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    Contact contact = (Contact) o;
+    return Objects.equals(contactId, contact.contactId) &&
+        Objects.equals(organization, contact.organization) &&
+        Objects.equals(academicTitle, contact.academicTitle) &&
+        Objects.equals(firstname, contact.firstname) &&
+        Objects.equals(middlenames, contact.middlenames) &&
+        Objects.equals(lastname, contact.lastname);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(contactId, organization, academicTitle, firstname, middlenames, lastname);
   }
 }
