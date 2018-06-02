@@ -1,7 +1,6 @@
 package open.schoolmanagement.contacts.importantcontactsservice.repository;
 
 import java.util.Collection;
-import java.util.UUID;
 import open.schoolmanagement.contacts.importantcontactsservice.domain.Contact;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -9,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * CRUD repository for contacts.
  */
-public interface ContactRepository extends CrudRepository<Contact, UUID> {
+public interface ContactRepository extends CrudRepository<Contact, Long> {
   /**
    * Find contacts by organization.
    *
