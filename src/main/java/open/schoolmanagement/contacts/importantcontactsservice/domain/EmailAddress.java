@@ -24,44 +24,50 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.Builder;
-import lombok.Getter;
 
 /**
  * An email address of a contact.
  */
-@Builder
 @Entity
 @Table(name = "email_address")
 public class EmailAddress {
-  @Getter
   @Column(name = "email_address")
   @Id
-  private String emailAddress;
+  public String emailAddress;
 
-  @Getter
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "contact_id")
-  private Contact contact;
+  public Contact contact;
 
-  @Getter
   @Column(name = "category")
-  private String category;
+  public String category;
+
+  /**
+   * Instantiates a new EmailAddress.
+   *
+   * @param emailAddress the email address
+   * @param category     the category
+   */
+  public EmailAddress(String emailAddress, String category) {
+    this.emailAddress = emailAddress;
+    this.category = category;
+  }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
+    if (this == o) {
       return true;
-    if (o == null || getClass() != o.getClass())
+    }
+    if (o == null || getClass() != o.getClass()) {
       return false;
+    }
     EmailAddress that = (EmailAddress) o;
-    return Objects.equals(emailAddress, that.emailAddress) &&
-        Objects.equals(category, that.category);
+    return Objects.equals(emailAddress, that.emailAddress)
+        && Objects.equals(category, that.category);
   }
 
   @Override
   public int hashCode() {
-
     return Objects.hash(emailAddress, category);
   }
 }

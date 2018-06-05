@@ -17,7 +17,6 @@
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
 import java.util.Objects;
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,49 +26,73 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import lombok.Builder;
-import lombok.Getter;
 
 /**
  * A ralation between two contacts.
  */
-@Builder
 @Entity
 @Table(name = "contact_relation")
 public class ContactRelation {
-  @Getter
   @Column(name = "contact_relation_id")
   @GeneratedValue
   @Id
-  private UUID id;
+  private Long id;
 
-  @Getter
+  /**
+   * The Contact.
+   */
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "origin_contact_id")
-  private Contact contact;
+  public Contact contact;
 
-  @Getter
+  /**
+   * The Relation name.
+   */
   @Column(name = "relation_name")
-  private String relationName;
+  public String relationName;
 
-  @Getter
+  /**
+   * The Related contact.
+   */
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "related_contact_id")
-  private Contact relatedContact;
+  public Contact relatedContact;
+
+  /**
+   * Instantiates a new ContactRelation.
+   *
+   * @param relationName   the relation name
+   * @param relatedContact the related contact
+   */
+  public ContactRelation(String relationName, Contact relatedContact) {
+    this.relationName = relationName;
+    this.relatedContact = relatedContact;
+  }
+
+  /**
+   * Gets id.
+   *
+   * @return the id
+   */
+  public Long getId() {
+    return id;
+  }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
+    if (this == o) {
       return true;
-    if (o == null || getClass() != o.getClass())
+    }
+    if (o == null || getClass() != o.getClass()) {
       return false;
+    }
     ContactRelation that = (ContactRelation) o;
-    return Objects.equals(id, that.id) &&
-        Objects.equals(relationName, that.relationName);
+    return Objects.equals(getId(), that.getId())
+        && Objects.equals(relationName, that.relationName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, relationName);
+    return Objects.hash(getId(), relationName);
   }
 }
