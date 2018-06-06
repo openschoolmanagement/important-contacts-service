@@ -16,32 +16,59 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.Builder;
-import lombok.Getter;
 
 /**
  * A Phone number of a contact.
  */
-@Builder
 @Entity
 @Table(name = "phone_number")
 public class PhoneNumber {
-  @Getter
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "contact_id")
-  private Contact contact;
+  public Contact contact;
 
-  @Getter
   @Column(name = "category")
-  private String category;
+  public String category;
 
-  @Getter
   @Column(name = "phone_number")
-  private String phoneNumber;
+  @Id
+  public String phoneNumber;
+
+  /**
+   * Instantiates a new Phone number.
+   *
+   * @param phoneNumber the phone number
+   * @param category    the category
+   */
+  public PhoneNumber(String phoneNumber, String category) {
+    this.phoneNumber = phoneNumber;
+    this.category = category;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    PhoneNumber that = (PhoneNumber) o;
+    return Objects.equals(category, that.category)
+        && Objects.equals(phoneNumber, that.phoneNumber);
+  }
+
+  @Override
+  public int hashCode() {
+
+    return Objects.hash(category, phoneNumber);
+  }
 }
