@@ -37,9 +37,9 @@ public class DataSourceConfig {
    */
   @Bean
   public DataSource dataSource(
-      @Value("#{environment.JDBC_DATABASE_URL}") String databaseUrl,
-      @Value("#{environment.JDBC_DATABASE_USERNAME}") String username,
-      @Value("#{environment.JDBC_DATABASE_PASSWORD}") String password) {
+      @Value("${spring.datasource.url}") String databaseUrl,
+      @Value("${spring.datasource.username}") String username,
+      @Value("${spring.datasource.password}") String password) {
     return DataSourceBuilder
         .create()
         .url(databaseUrl)

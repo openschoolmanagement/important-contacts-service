@@ -76,7 +76,8 @@ public interface ContactService {
    * @param relationName the relation name
    * @return an optional that contains the contact, or empty in case of an error
    */
-  Optional<Contact> removeRelatedContact(Long contactId, String relationName) throws ContactNotFoundException;
+  Optional<Contact> removeRelatedContact(Long contactId, String relationName)
+      throws ContactNotFoundException;
 
   /**
    * Add email address.
@@ -86,7 +87,8 @@ public interface ContactService {
    * @param emailAddress the email address
    * @return an optional that contains the contact, or empty in case of an error
    */
-  Optional<Contact> addEmailAddress(Long contactId, String category, String emailAddress) throws ContactNotFoundException;
+  Optional<Contact> addEmailAddress(Long contactId, String category, String emailAddress)
+      throws ContactNotFoundException;
 
   /**
    * Remove email address.
@@ -95,7 +97,8 @@ public interface ContactService {
    * @param category  the category
    * @return an optional that contains the contact, or empty in case of an error
    */
-  Optional<Contact> removeEmailAddress(Long contactId, String category) throws ContactNotFoundException;
+  Optional<Contact> removeEmailAddress(Long contactId, String category)
+      throws ContactNotFoundException;
 
   /**
    * Add phone number.
@@ -105,7 +108,8 @@ public interface ContactService {
    * @param phoneNumber the phone number
    * @return an optional that contains the contact, or empty in case of an error
    */
-  Optional<Contact> addPhoneNumber(Long contactId, String category, String phoneNumber) throws ContactNotFoundException;
+  Optional<Contact> addPhoneNumber(Long contactId, String category, String phoneNumber)
+      throws ContactNotFoundException;
 
   /**
    * Remove phone number.
@@ -114,7 +118,8 @@ public interface ContactService {
    * @param category  the category
    * @return an optional that contains the contact, or empty in case of an error
    */
-  Optional<Contact> removePhoneNumber(Long contactId, String category) throws ContactNotFoundException;
+  Optional<Contact> removePhoneNumber(Long contactId, String category)
+      throws ContactNotFoundException;
 
   /**
    * Delete contact.
