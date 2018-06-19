@@ -79,19 +79,19 @@ public class Contact implements Person, Organization {
 
   @OneToMany(mappedBy = "contact",
       fetch = FetchType.LAZY,
-      cascade = CascadeType.ALL,
+      cascade = CascadeType.MERGE,
       orphanRemoval = true)
   private Set<EmailAddress> emailAddresses = new HashSet<>();
 
   @OneToMany(mappedBy = "contact",
       fetch = FetchType.LAZY,
-      cascade = CascadeType.ALL,
+      cascade = CascadeType.MERGE,
       orphanRemoval = true)
   private Set<PhoneNumber> phoneNumbers  = new HashSet<>();
 
   @OneToMany(mappedBy = "contact",
       fetch = FetchType.LAZY,
-      cascade = CascadeType.ALL,
+      cascade = CascadeType.MERGE,
       orphanRemoval = true)
   private Set<ContactRelation> relatedContacts  = new HashSet<>();
 

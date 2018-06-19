@@ -31,6 +31,8 @@ import org.springframework.stereotype.Service;
 public class ContactServiceImpl implements ContactService {
   private ContactRepository contactRepository;
 
+  public ContactServiceImpl() {}
+
   @Autowired
   private ContactServiceImpl(ContactRepository contactRepository) {
     this.contactRepository = contactRepository;
