@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest(classes = ImportantContactsServiceApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class ContactServiceTest {
+
   @Autowired
   private ContactService contactService;
 
@@ -59,15 +60,12 @@ public class ContactServiceTest {
   @Transactional
   public void add_related_contact_is_successful() throws Exception {
     String relationName = "Spouse";
-    Contact createdContact1 = contactService.createContact(createFirstContactBuilder())
-        .orElseThrow(Exception::new);
-    Contact createdContact2 = contactService.createContact(createSecondContactBuilder())
-        .orElseThrow(Exception::new);
+    Long createdContact1Id = saveContact(createFirstContactBuilder());
+    Long createdContact2Id = saveContact(createSecondContactBuilder());
 
-    contactService.addRelatedContact(
-        createdContact1.getContactId(), relationName, createdContact2.getContactId());
-
-    Contact lookedUpContact = contactService.readContact(createdContact1.getContactId())
+    contactService.addRelatedContact(createdContact1Id, relationName, createdContact2Id);
+    
+    Contact lookedUpContact = contactService.readContact(createdContact1Id)
         .orElseThrow(Exception::new);
 
     lookedUpContact
@@ -75,9 +73,15 @@ public class ContactServiceTest {
         .stream()
         .filter(relation ->
             Objects.equals(relation.relationName, relationName)
-                && Objects.equals(relation.relatedContact, createdContact2))
+                && Objects.equals(relation.relatedContact.getContactId(), createdContact2Id))
         .findFirst()
         .orElseThrow(Exception::new);
+  }
+
+  private Long saveContact(Contact.ContactBuilder contactBuilder) throws Exception {
+    return contactService.createContact(contactBuilder)
+        .orElseThrow(Exception::new)
+        .getContactId();
   }
 
   private Contact.ContactBuilder createFirstContactBuilder() {
