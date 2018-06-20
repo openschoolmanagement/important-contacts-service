@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ImportantContactsServiceApplication.class)
@@ -57,14 +56,13 @@ public class ContactServiceTest {
   }
 
   @Test
-  @Transactional
   public void add_related_contact_is_successful() throws Exception {
     String relationName = "Spouse";
     Long createdContact1Id = saveContact(createFirstContactBuilder());
     Long createdContact2Id = saveContact(createSecondContactBuilder());
 
     contactService.addRelatedContact(createdContact1Id, relationName, createdContact2Id);
-    
+
     Contact lookedUpContact = contactService.readContact(createdContact1Id)
         .orElseThrow(Exception::new);
 
