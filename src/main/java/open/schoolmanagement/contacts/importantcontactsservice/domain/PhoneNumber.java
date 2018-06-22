@@ -42,6 +42,8 @@ public class PhoneNumber {
   @Id
   public String phoneNumber;
 
+  private PhoneNumber() {}
+
   /**
    * Instantiates a new Phone number.
    *

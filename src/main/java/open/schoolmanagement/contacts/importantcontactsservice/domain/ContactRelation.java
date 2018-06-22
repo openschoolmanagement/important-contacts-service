@@ -58,6 +58,8 @@ public class ContactRelation {
   @JoinColumn(name = "related_contact_id")
   public Contact relatedContact;
 
+  private ContactRelation() {}
+
   /**
    * Instantiates a new ContactRelation.
    *

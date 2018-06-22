@@ -16,16 +16,21 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.config;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * Configuration of the data source.
  */
 @Configuration
+@EnableTransactionManagement
 public class DataSourceConfig {
   /**
    * Bean getter for the data source.
@@ -37,14 +42,25 @@ public class DataSourceConfig {
    */
   @Bean
   public DataSource dataSource(
-      @Value("#{environment.JDBC_DATABASE_URL}") String databaseUrl,
-      @Value("#{environment.JDBC_DATABASE_USERNAME}") String username,
-      @Value("#{environment.JDBC_DATABASE_PASSWORD}") String password) {
+      @Value("${spring.datasource.url}") String databaseUrl,
+      @Value("${spring.datasource.username}") String username,
+      @Value("${spring.datasource.password}") String password) {
     return DataSourceBuilder
         .create()
         .url(databaseUrl)
         .username(username)
         .password(password)
         .build();
+  }
+
+  /**
+   * Bean getter for the transaction manager.
+   *
+   * @param entityManagerFactory the entity manager factory
+   * @return the platform transaction manager
+   */
+  @Bean
+  public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+    return new JpaTransactionManager(entityManagerFactory);
   }
 }

@@ -42,6 +42,8 @@ public class EmailAddress {
   @Column(name = "category")
   public String category;
 
+  private EmailAddress() {}
+
   /**
    * Instantiates a new EmailAddress.
    *
