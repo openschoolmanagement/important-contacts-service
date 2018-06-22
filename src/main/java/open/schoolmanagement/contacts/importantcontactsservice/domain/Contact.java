@@ -96,6 +96,24 @@ public class Contact implements Person, Organization {
   private Set<ContactRelation> relatedContacts  = new HashSet<>();
 
   /**
+   * Gets the phone numbers.
+   *
+   * @return the phone numbers
+   */
+  public Set<PhoneNumber> getPhoneNumbers() {
+    return phoneNumbers;
+  }
+
+  /**
+   * Gets the email address.
+   *
+   * @return the email addresses
+   */
+  public Set<EmailAddress> getEmailAddresses() {
+    return emailAddresses;
+  }
+
+  /**
    * Gets the related contacts.
    *
    * @return the related contacts

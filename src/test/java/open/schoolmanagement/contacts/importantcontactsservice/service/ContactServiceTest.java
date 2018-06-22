@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ImportantContactsServiceApplication.class)
@@ -56,6 +57,7 @@ public class ContactServiceTest {
   }
 
   @Test
+  @Transactional
   public void add_related_contact_is_successful() throws Exception {
     String relationName = "Spouse";
     Long createdContact1Id = saveContact(createFirstContactBuilder());
@@ -75,6 +77,113 @@ public class ContactServiceTest {
         .findFirst()
         .orElseThrow(Exception::new);
   }
+
+  @Test
+  @Transactional
+  public void remove_related_contact_is_successful() throws Exception {
+    String relationName = "Spouse";
+    Long createdContact1Id = saveContact(createFirstContactBuilder());
+    Long createdContact2Id = saveContact(createSecondContactBuilder());
+
+    contactService.addRelatedContact(createdContact1Id, relationName, createdContact2Id);
+    contactService.removeRelatedContact(createdContact1Id, relationName);
+
+    Contact lookedUpContact = contactService.readContact(createdContact1Id)
+        .orElseThrow(Exception::new);
+
+    assertThat(lookedUpContact.getRelatedContacts().size()).isEqualTo(0);
+  }
+
+  @Test
+  @Transactional
+  public void add_email_address_is_successful() throws Exception {
+    String category = "Private";
+    String email = "john.doe@home.com";
+    Long createdContact1Id = saveContact(createFirstContactBuilder());
+
+    contactService.addEmailAddress(createdContact1Id, category, email);
+
+    Contact lookedUpContact = contactService.readContact(createdContact1Id)
+        .orElseThrow(Exception::new);
+
+    lookedUpContact
+        .getEmailAddresses()
+        .stream()
+        .filter(emailAddress ->
+            Objects.equals(emailAddress.category, category)
+                && Objects.equals(emailAddress.emailAddress, email))
+        .findFirst()
+        .orElseThrow(Exception::new);
+  }
+
+  @Test
+  @Transactional
+  public void remove_email_address_is_successful() throws Exception {
+    String category = "Private";
+    String email = "john.doe@home.com";
+    Long createdContact1Id = saveContact(createFirstContactBuilder());
+
+    contactService.addEmailAddress(createdContact1Id, category, email);
+    contactService.removeEmailAddress(createdContact1Id, category);
+
+    Contact lookedUpContact = contactService.readContact(createdContact1Id)
+        .orElseThrow(Exception::new);
+
+    assertThat(lookedUpContact.getEmailAddresses().size()).isEqualTo(0);
+  }
+
+  @Test
+  @Transactional
+  public void add_phone_numner_is_successful() throws Exception {
+    String category = "Private";
+    String phone = "123456789";
+    Long createdContact1Id = saveContact(createFirstContactBuilder());
+
+    contactService.addPhoneNumber(createdContact1Id, category, phone);
+
+    Contact lookedUpContact = contactService.readContact(createdContact1Id)
+        .orElseThrow(Exception::new);
+
+    lookedUpContact
+        .getPhoneNumbers()
+        .stream()
+        .filter(number ->
+            Objects.equals(number.category, category)
+                && Objects.equals(number.phoneNumber, phone))
+        .findFirst()
+        .orElseThrow(Exception::new);
+  }
+
+  @Test
+  @Transactional
+  public void remove_phone_numner_is_successful() throws Exception {
+    String category = "Private";
+    String phone = "123456789";
+    Long createdContact1Id = saveContact(createFirstContactBuilder());
+
+    contactService.addPhoneNumber(createdContact1Id, category, phone);
+    contactService.removePhoneNumber(createdContact1Id, category);
+
+    Contact lookedUpContact = contactService.readContact(createdContact1Id)
+        .orElseThrow(Exception::new);
+
+    assertThat(lookedUpContact.getPhoneNumbers().size()).isEqualTo(0);
+  }
+
+  @Test
+  @Transactional
+  public void delete_contact_is_successful() throws Exception {
+    Long createdContact1Id = saveContact(createFirstContactBuilder());
+    Long createdContact2Id = saveContact(createSecondContactBuilder());
+
+    assertThat(contactService.readAllContacts().size()).isEqualTo(2);
+
+    contactService.deleteContact(createdContact1Id);
+
+    assertThat(contactService.readAllContacts().size()).isEqualTo(1);
+    assertThat(contactService.readContact(createdContact1Id)).isEmpty();
+  }
+
 
   private Long saveContact(Contact.ContactBuilder contactBuilder) throws Exception {
     return contactService.createContact(contactBuilder)
