@@ -19,6 +19,7 @@ package open.schoolmanagement.contacts.importantcontactsservice.config;
 import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.API_V1;
 import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.CONTACT_SERVICE;
 import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.PING_URI;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;

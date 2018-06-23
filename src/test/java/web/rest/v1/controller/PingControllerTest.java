@@ -20,6 +20,7 @@ import static open.schoolmanagement.contacts.importantcontactsservice.config.Con
 import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.CONTACT_SERVICE;
 import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.PING_URI;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.PingController;
 import org.junit.Before;
@@ -58,5 +59,17 @@ public class PingControllerTest {
 
     assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
     assertThat(response.getContentAsString()).isEqualTo("42");
+  }
+
+  @Test
+  public void calling_ping_with_csrf_is_not_returning_token() throws Exception {
+    MockHttpServletResponse response = mvc
+        .perform(get(API_V1 + CONTACT_SERVICE + PING_URI).with(csrf().asHeader()))
+        .andReturn()
+        .getResponse();
+
+    assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+    assertThat(response.getContentAsString()).isEqualTo("42");
+    assertThat(response.getHeaderNames()).doesNotContain("X-CSRF-Token");
   }
 }
