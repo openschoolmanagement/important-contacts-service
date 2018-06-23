@@ -1,5 +1,5 @@
 CREATE TABLE contact(
-    contact_id      BIGINT not null PRIMARY KEY,
+    contact_id      BIGINT NOT NULL,
     organization    TEXT CHARACTER SET utf8,
     salutation      TEXT CHARACTER SET utf8,
     academic_title  TEXT CHARACTER SET utf8,
@@ -13,27 +13,27 @@ CREATE TABLE contact(
     country         TEXT CHARACTER SET utf8,
     notes           TEXT CHARACTER SET utf8
 );
-CREATE INDEX idx_contact_organization
-    ON contact(organization);
-CREATE INDEX idx_contact_person
-    ON contact(firstname, middlenames, lastname);
+-- CREATE INDEX idx_contact_organization
+--     ON contact(organization);
+-- CREATE INDEX idx_contact_person
+--     ON contact(firstname, middlenames, lastname);
 
 CREATE TABLE contact_relation (
-    contact_relation_id BIGINT not null PRIMARY KEY,
-    origin_contact_id   BIGINT not null,
+    contact_relation_id BIGINT NOT NULL,
+    origin_contact_id   BIGINT NOT NULL,
     relation_name       TEXT CHARACTER SET utf8,
-    related_contact_id  BIGINT not null
+    related_contact_id  BIGINT NOT NULL
 );
 
 CREATE TABLE email_address (
-    email_address TEXT CHARACTER SET utf8 PRIMARY KEY,
+    email_address TEXT CHARACTER SET utf8,
     category      TEXT CHARACTER SET utf8,
-    contact_id    BIGINT not null
+    contact_id    BIGINT NOT NULL
 );
 
 CREATE TABLE phone_number (
-    phone_number    TEXT CHARACTER SET utf8 PRIMARY KEY,
-    contact_id      BIGINT not null,
+    phone_number    TEXT CHARACTER SET utf8,
+    contact_id      BIGINT NOT NULL,
     category        TEXT CHARACTER SET utf8
 );
 
