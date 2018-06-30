@@ -16,11 +16,14 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.config;
 
+import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.ALL_CONTACTS_URI;
 import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.API_V1;
 import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.CONTACT_SERVICE;
+import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.CSRF_URI;
 import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.PING_URI;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -47,7 +50,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http
         .authorizeRequests()
-        .and()
-        .csrf();
+          .antMatchers(HttpMethod.GET, API_V1 + CONTACT_SERVICE + CSRF_URI)
+            .authenticated()
+          .antMatchers(HttpMethod.GET, API_V1 + CONTACT_SERVICE + ALL_CONTACTS_URI)
+            .authenticated();
   }
 }
