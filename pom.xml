@@ -82,6 +82,12 @@
             <artifactId>commons-collections4</artifactId>
             <version>4.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.2</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Unit Testing -->
         <dependency>
@@ -207,8 +213,7 @@
                                     <excludes>
                                         <exclude>open.schoolmanagement.contacts.importantcontactsservice.ImportantContactsServiceApplication</exclude>
                                         <exclude>open.schoolmanagement.contacts.importantcontactsservice.config.*</exclude>
-                                        <exclude>open.schoolmanagement.contacts.importantcontactsservice.domain.*</exclude>
-                                        <exclude>*.exception.*</exclude>
+                                        <exclude>open.schoolmanagement.contacts.importantcontactsservice.*.exception.*</exclude>
                                     </excludes>
                                 </rule>
                             </rules>

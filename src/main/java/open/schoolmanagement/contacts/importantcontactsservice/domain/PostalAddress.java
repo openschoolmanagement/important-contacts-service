@@ -30,22 +30,22 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * An email address
+ * A Contact.
  */
 @ToString
-@EqualsAndHashCode(of = "emailAddressId")
+@EqualsAndHashCode(of = "addressId")
 @Builder
 @Entity
-@Table(name = "emailAddress")
-public class EmailAddress {
+@Table(name = "postalAddress")
+public class PostalAddress {
   /**
    * The address id.
    */
   @Getter
   @Id
   @GeneratedValue
-  @Column(name = "emailAddressId", nullable = false)
-  private Long emailAddressId;
+  @Column(name = "addressId", nullable = false)
+  private Long addressId;
 
   /**
    * The label of the address.
@@ -57,12 +57,52 @@ public class EmailAddress {
   private String label;
 
   /**
-   * The email address.
+   * The street name.
    */
   @Getter
   @Setter
-  @Column(name = "email")
-  private String email;
+  @Column(name = "street")
+  private String street;
+
+  /**
+   * The city name.
+   */
+  @Getter
+  @Setter
+  @Column(name = "city")
+  private String city;
+
+  /**
+   * The state name.
+   */
+  @Getter
+  @Setter
+  @Column(name = "state")
+  private String state;
+
+  /**
+   * The postal code.
+   */
+  @Getter
+  @Setter
+  @Column(name = "postalCode")
+  private String postalCode;
+
+  /**
+   * The country name.
+   */
+  @Getter
+  @Setter
+  @Column(name = "country")
+  private String country;
+
+  /**
+   * The ISO country code, using the ISO 3166-1 alpha-2 standard .
+   */
+  @Getter
+  @Setter
+  @Column(name = "isoCountryCode")
+  private String isoCountryCode;
 
   /**
    * The contact

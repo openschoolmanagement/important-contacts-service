@@ -16,61 +16,59 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
- * A Phone number of a contact.
+ * A phone number
  */
+@ToString
+@EqualsAndHashCode(of = "phoneNumberId")
+@Builder
 @Entity
-@Table(name = "phone_number")
+@Table(name = "phoneNumber")
 public class PhoneNumber {
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "contact_id")
-  public Contact contact;
-
-  @Column(name = "category")
-  public String category;
-
-  @Column(name = "phone_number")
+  /**
+   * The phone number id.
+   */
+  @Getter
   @Id
-  public String phoneNumber;
-
-  private PhoneNumber() {}
+  @GeneratedValue
+  @Column(name = "phoneNumberId", nullable = false)
+  private Long phoneNumberId;
 
   /**
-   * Instantiates a new Phone number.
-   *
-   * @param phoneNumber the phone number
-   * @param category    the category
+   * The label of the phone number.
    */
-  public PhoneNumber(String phoneNumber, String category) {
-    this.phoneNumber = phoneNumber;
-    this.category = category;
-  }
+  @Getter
+  @Setter
+  @NonNull
+  @Column(name = "label", nullable = false)
+  private String label;
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    PhoneNumber that = (PhoneNumber) o;
-    return Objects.equals(category, that.category)
-        && Objects.equals(phoneNumber, that.phoneNumber);
-  }
+  /**
+   * The phone number.
+   */
+  @Getter
+  @Setter
+  @Column(name = "phoneNumber")
+  private String phoneNumber;
 
-  @Override
-  public int hashCode() {
-
-    return Objects.hash(category, phoneNumber);
-  }
+  /**
+   * The contact
+   */
+  @Getter
+  @Setter
+  @ManyToOne
+  private Contact contact;
 }

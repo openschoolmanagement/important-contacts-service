@@ -16,6 +16,7 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,25 +31,25 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * An email address
+ * A date
  */
 @ToString
-@EqualsAndHashCode(of = "emailAddressId")
+@EqualsAndHashCode(of = "dateId")
 @Builder
 @Entity
-@Table(name = "emailAddress")
-public class EmailAddress {
+@Table(name = "labeledDate")
+public class LabeledDate {
   /**
-   * The address id.
+   * The phone number id.
    */
   @Getter
   @Id
   @GeneratedValue
-  @Column(name = "emailAddressId", nullable = false)
-  private Long emailAddressId;
+  @Column(name = "dateId", nullable = false)
+  private Long dateId;
 
   /**
-   * The label of the address.
+   * The label of the date.
    */
   @Getter
   @Setter
@@ -57,12 +58,12 @@ public class EmailAddress {
   private String label;
 
   /**
-   * The email address.
+   * The date.
    */
   @Getter
   @Setter
-  @Column(name = "email")
-  private String email;
+  @Column(name = "dateValue")
+  private Date date;
 
   /**
    * The contact
