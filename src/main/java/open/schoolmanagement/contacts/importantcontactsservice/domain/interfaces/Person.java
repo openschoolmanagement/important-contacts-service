@@ -17,7 +17,7 @@
 package open.schoolmanagement.contacts.importantcontactsservice.domain.interfaces;
 
 /**
- * Access a Contact as a Person.
+ * Access a EdmContact as a Person.
  */
 public interface Person {
   /**

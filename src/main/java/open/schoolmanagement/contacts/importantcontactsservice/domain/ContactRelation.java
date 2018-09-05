@@ -39,7 +39,7 @@ public class ContactRelation {
   private Long id;
 
   /**
-   * The Contact.
+   * The EdmContact.
    */
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "origin_contact_id")

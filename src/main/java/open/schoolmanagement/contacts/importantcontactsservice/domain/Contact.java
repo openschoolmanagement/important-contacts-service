@@ -31,7 +31,7 @@ import open.schoolmanagement.contacts.importantcontactsservice.domain.interfaces
 import open.schoolmanagement.contacts.importantcontactsservice.domain.interfaces.Person;
 
 /**
- * A Contact.
+ * A EdmContact.
  */
 @Entity
 @Table(name = "contact")
@@ -497,7 +497,7 @@ public class Contact implements Person, Organization {
   }
 
   /**
-   * The type Contact builder.
+   * The type EdmContact builder.
    */
   public static final class ContactBuilder {
     private String organization;

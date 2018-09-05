@@ -7,6 +7,7 @@ import static open.schoolmanagement.contacts.importantcontactsservice.config.Con
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -19,7 +20,7 @@ public class CsrfController {
    *
    * @return a response entity with the value 42 and HTTP status code OK
    */
-  @RequestMapping(path = API_V1 + CONTACT_SERVICE + CSRF_URI)
+  @RequestMapping(method = RequestMethod.GET, path = API_V1 + CONTACT_SERVICE + CSRF_URI)
   public ResponseEntity<String> csrfStub() {
     return new ResponseEntity<String>("", HttpStatus.NO_CONTENT);
   }

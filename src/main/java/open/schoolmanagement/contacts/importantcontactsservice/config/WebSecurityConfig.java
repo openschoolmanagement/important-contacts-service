@@ -48,11 +48,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    // TODO currently all endpoints are open, must be closes once user service is available
     http
         .authorizeRequests()
           .antMatchers(HttpMethod.GET, API_V1 + CONTACT_SERVICE + CSRF_URI)
-            .authenticated()
+            .permitAll()
           .antMatchers(HttpMethod.GET, API_V1 + CONTACT_SERVICE + ALL_CONTACTS_URI)
-            .authenticated();
+            .permitAll();
   }
 }
