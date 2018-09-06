@@ -19,24 +19,25 @@ package open.schoolmanagement.contacts.importantcontactsservice.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 /**
- * A Contact.
+ * A Contact. This is a transient entity.
  */
 @ToString
 @EqualsAndHashCode(of = "contactId")
@@ -48,10 +49,11 @@ public class Contact implements Serializable {
    * The contact id.
    */
   @Getter
+  @Setter
+  @NonNull
   @Id
-  @GeneratedValue
-  @Column(name = "contactId", nullable = false)
-  private Long contactId;
+  @Column(name = "id", nullable = false)
+  private UUID id;
 
   /**
    * The organization of the contact.

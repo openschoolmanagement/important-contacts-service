@@ -14,14 +14,12 @@
    limitations under the License.
  */
 
-package open.schoolmanagement.contacts.importantcontactsservice.domain;
+package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.model;
 
-import java.util.Date;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -31,46 +29,21 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * A date. This is a transient entity.
+ * A key that is already used by an aggregate. This is a transient entity.
  */
 @ToString
-@EqualsAndHashCode(of = "dateId")
+@EqualsAndHashCode(of = "key")
 @Builder
 @Entity
-@Table(name = "labeledDate")
-public class LabeledDate {
+@Table(name = "usedKey")
+public class UsedKey {
   /**
-   * The date id.
+   * The key.
    */
   @Getter
   @Setter
   @NonNull
   @Id
-  @Column(name = "id", nullable = false)
-  private UUID id;
-
-  /**
-   * The label of the date.
-   */
-  @Getter
-  @Setter
-  @NonNull
-  @Column(name = "label", nullable = false)
-  private String label;
-
-  /**
-   * The date.
-   */
-  @Getter
-  @Setter
-  @Column(name = "dateValue")
-  private Date date;
-
-  /**
-   * The contact.
-   */
-  @Getter
-  @Setter
-  @ManyToOne
-  private Contact contact;
+  @Column(name = "key", nullable = false)
+  private UUID key;
 }

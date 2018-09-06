@@ -16,9 +16,9 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -30,7 +30,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * An email address
+ * An email address. This is a transient entity.
  */
 @ToString
 @EqualsAndHashCode(of = "emailAddressId")
@@ -39,13 +39,14 @@ import lombok.ToString;
 @Table(name = "emailAddress")
 public class EmailAddress {
   /**
-   * The address id.
+   * The email address id.
    */
   @Getter
+  @Setter
+  @NonNull
   @Id
-  @GeneratedValue
-  @Column(name = "emailAddressId", nullable = false)
-  private Long emailAddressId;
+  @Column(name = "id", nullable = false)
+  private UUID id;
 
   /**
    * The label of the address.
@@ -65,7 +66,7 @@ public class EmailAddress {
   private String email;
 
   /**
-   * The contact
+   * The contact.
    */
   @Getter
   @Setter
