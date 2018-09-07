@@ -33,7 +33,7 @@ import lombok.ToString;
  * A phone number. This is a transient entity.
  */
 @ToString
-@EqualsAndHashCode(of = "phoneNumberId")
+@EqualsAndHashCode(of = "id")
 @Builder
 @Entity
 @Table(name = "phoneNumber")

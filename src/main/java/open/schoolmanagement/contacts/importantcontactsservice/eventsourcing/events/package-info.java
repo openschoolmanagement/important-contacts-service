@@ -14,24 +14,7 @@
    limitations under the License.
  */
 
-package open.schoolmanagement.contacts.importantcontactsservice.config;
-
 /**
- * This class provides several configuration related constants.
+ * This package contains events for the event sourcing implementation.
  */
-public class Constants {
-  /**
-   * URI for the important contacts version 1 API.
-   */
-  public static final String API_V1_IMPORTANT_CONTACTS_URI = "/importantcontacts/api/v1/";
-
-  /**
-   * URI for public endpoints.
-   */
-  public static final String PUBLIC_URI = "public/";
-
-  /**
-   * URI for the write commands.
-   */
-  public static final String WRITE_URI = "write/";
-}
+package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events;

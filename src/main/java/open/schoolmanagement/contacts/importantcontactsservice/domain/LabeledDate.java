@@ -34,7 +34,7 @@ import lombok.ToString;
  * A date. This is a transient entity.
  */
 @ToString
-@EqualsAndHashCode(of = "dateId")
+@EqualsAndHashCode(of = "id")
 @Builder
 @Entity
 @Table(name = "labeledDate")

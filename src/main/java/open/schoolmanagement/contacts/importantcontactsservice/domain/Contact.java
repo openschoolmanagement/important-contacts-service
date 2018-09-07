@@ -17,8 +17,8 @@
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,7 +40,7 @@ import org.hibernate.annotations.FetchMode;
  * A Contact. This is a transient entity.
  */
 @ToString
-@EqualsAndHashCode(of = "contactId")
+@EqualsAndHashCode(of = "id")
 @Builder
 @Entity
 @Table(name = "contact")
@@ -104,6 +104,14 @@ public class Contact implements Serializable {
   private String lastName;
 
   /**
+   * Notes for the contact.
+   */
+  @Getter
+  @Setter
+  @Column(name = "notes")
+  private String notes;
+
+  /**
    * The postal addresses of the contact.
    */
   @Getter
@@ -111,7 +119,7 @@ public class Contact implements Serializable {
   @Builder.Default
   @OneToMany(mappedBy = "contact", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @Fetch(FetchMode.JOIN)
-  private List<PostalAddress> postalAddresses = new ArrayList<>();
+  private Set<PostalAddress> postalAddresses = new HashSet<>();
 
   /**
    * The email addresses of the contact.
@@ -121,7 +129,7 @@ public class Contact implements Serializable {
   @Builder.Default
   @OneToMany(mappedBy = "contact", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @Fetch(FetchMode.JOIN)
-  private List<EmailAddress> emailAddresses = new ArrayList<>();
+  private Set<EmailAddress> emailAddresses = new HashSet<>();
 
   /**
    * The phone numbers of the contact.
@@ -131,7 +139,7 @@ public class Contact implements Serializable {
   @Builder.Default
   @OneToMany(mappedBy = "contact", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @Fetch(FetchMode.JOIN)
-  private List<PhoneNumber> phoneNumbers = new ArrayList<>();
+  private Set<PhoneNumber> phoneNumbers = new HashSet<>();
 
   /**
    * The dates of the contact.
@@ -141,5 +149,5 @@ public class Contact implements Serializable {
   @Builder.Default
   @OneToMany(mappedBy = "contact", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
   @Fetch(FetchMode.JOIN)
-  private List<LabeledDate> dates = new ArrayList<>();
+  private Set<LabeledDate> dates = new HashSet<>();
 }
