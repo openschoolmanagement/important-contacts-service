@@ -30,32 +30,40 @@ import org.springframework.stereotype.Service;
 class UsedKeyServiceImpl implements UsedKeyService {
   private final UsedKeyRepository usedKeyRepository;
 
+  private Object lockObject = new Object();
+
   UsedKeyServiceImpl(UsedKeyRepository usedKeyRepository) {
     this.usedKeyRepository = usedKeyRepository;
   }
 
   @Override
   public Optional<UUID> validateKeyIsNotUsed(UUID key) {
-    return usedKeyRepository.existsById(key) ? Optional.empty() : Optional.of(key);
+    synchronized (lockObject) {
+      return usedKeyRepository.existsById(key) ? Optional.empty() : Optional.of(key);
+    }
   }
 
   @Override
   public void markKeyAsUsed(UUID key) {
-    usedKeyRepository
-        .save(
-            UsedKey
-                .builder()
-                .key(key)
-                .build());
+    synchronized (lockObject) {
+      usedKeyRepository
+          .save(
+              UsedKey
+                  .builder()
+                  .key(key)
+                  .build());
+    }
   }
 
   @Override
   public void markKeyAsNotUsed(UUID key) {
-    usedKeyRepository
-        .delete(
-            UsedKey
-                .builder()
-                .key(key)
-                .build());
+    synchronized (lockObject) {
+      usedKeyRepository
+          .delete(
+              UsedKey
+                  .builder()
+                  .key(key)
+                  .build());
+    }
   }
 }

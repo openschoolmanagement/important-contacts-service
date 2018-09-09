@@ -20,7 +20,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * This service is providing the logic to check, save and delete used keys.
+ * This service is providing the logic to check, save and delete used keys. All method are thread
+ * save.
  */
 public interface UsedKeyService {
   /**
