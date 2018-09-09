@@ -48,6 +48,7 @@ public class ContactController extends CommandController {
         .map(CreateContact::getId)
         .map(usedKeyService::validateKeyIsNotUsed)
         .map(keyOptional -> keyOptional.orElseThrow(RuntimeException::new))
+        .doOnNext(usedKeyService::markKeyAsUsed)
         .map(ContactCreated::new)
         .doOnNext(eventSource::accept)
         .map(Event::getEventId)
