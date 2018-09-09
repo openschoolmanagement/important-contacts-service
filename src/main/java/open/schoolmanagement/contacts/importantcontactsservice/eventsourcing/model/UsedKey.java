@@ -44,6 +44,6 @@ public class UsedKey {
   @Setter
   @NonNull
   @Id
-  @Column(name = "key", nullable = false)
+  @Column(name = "id", nullable = false)
   private UUID key;
 }

@@ -16,6 +16,7 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.impl;
 
+import java.util.Optional;
 import java.util.UUID;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.model.UsedKey;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.repository.UsedKeyRepository;
@@ -34,8 +35,8 @@ class UsedKeyServiceImpl implements UsedKeyService {
   }
 
   @Override
-  public boolean validateKeyIsNotUsed(UUID key) {
-    return !usedKeyRepository.existsById(key);
+  public Optional<UUID> validateKeyIsNotUsed(UUID key) {
+    return usedKeyRepository.existsById(key) ? Optional.empty() : Optional.of(key);
   }
 
   @Override

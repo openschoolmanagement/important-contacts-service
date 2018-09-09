@@ -16,7 +16,12 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact;
 
+import java.time.Duration;
+import java.util.UUID;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.ContactCreated;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.Event;
 import open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact.commands.CreateContact;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +32,7 @@ import reactor.core.publisher.Mono;
  * REST Controller the provides the Contact related commands.
  */
 @RestController
-public class ContactController {
+public class ContactController extends CommandController {
 
   /**
    * Handler for the CreateContact command.
@@ -35,9 +40,18 @@ public class ContactController {
    * @param createContact the create contact command
    */
   @RequestMapping(method = RequestMethod.POST, path = CreateContact.URI)
-  public void createContact(
+  public ResponseEntity<UUID> createContact(
       @RequestBody(required = true) CreateContact createContact) {
 
-    Mono.empty();
+    return Mono
+        .just(createContact)
+        .map(CreateContact::getId)
+        .map(usedKeyService::validateKeyIsNotUsed)
+        .map(keyOptional -> keyOptional.orElseThrow(RuntimeException::new))
+        .map(ContactCreated::new)
+        .doOnNext(eventSource::accept)
+        .map(Event::getEventId)
+        .map(ResponseEntity.accepted()::body)
+        .block(Duration.ZERO);
   }
 }

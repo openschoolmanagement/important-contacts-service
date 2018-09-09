@@ -16,6 +16,7 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -28,7 +29,7 @@ public interface UsedKeyService {
    * @param key the key to validate
    * @return true if the key is not used, otherwise false
    */
-  boolean validateKeyIsNotUsed(UUID key);
+  Optional<UUID> validateKeyIsNotUsed(UUID key);
 
   /**
    * Mark the given key as used.

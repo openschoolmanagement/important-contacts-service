@@ -14,6 +14,9 @@
 --   limitations under the License.
 --
 
+--
+-- Domain Model
+--
 CREATE TABLE contact (
     id              VARCHAR(36) NOT NULL,
     organization    TEXT CHARACTER SET utf8 NULL,
