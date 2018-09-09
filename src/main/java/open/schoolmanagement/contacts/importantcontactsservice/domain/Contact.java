@@ -76,7 +76,7 @@ public class Contact implements Serializable {
    */
   @Getter
   @Setter
-  @Column(name = "academicTitle")
+  @Column(name = "academic_title")
   private String academicTitle;
 
   /**
@@ -84,7 +84,7 @@ public class Contact implements Serializable {
    */
   @Getter
   @Setter
-  @Column(name = "givenName")
+  @Column(name = "given_name")
   private String givenName;
 
   /**
@@ -92,7 +92,7 @@ public class Contact implements Serializable {
    */
   @Getter
   @Setter
-  @Column(name = "middleNames")
+  @Column(name = "middle_names")
   private String middleNames;
 
   /**
@@ -100,7 +100,7 @@ public class Contact implements Serializable {
    */
   @Getter
   @Setter
-  @Column(name = "lastName")
+  @Column(name = "last_name")
   private String lastName;
 
   /**

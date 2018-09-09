@@ -16,17 +16,20 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact;
 
-import java.time.Duration;
-import java.util.UUID;
+import java.util.Optional;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.ContactCreated;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.Event;
-import open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact.commands.CreateContact;
+import open.schoolmanagement.contacts.importantcontactsservice.web.rest.exception.DuplicateKeyException;
+import open.schoolmanagement.contacts.importantcontactsservice.web.rest.exception.InternalServerError;
+import open.schoolmanagement.contacts.importantcontactsservice.web.rest.exception.NoKeyException;
+import open.schoolmanagement.contacts.importantcontactsservice.web.rest.exception.ServerRuntimeException;
+import open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact.command.CreateContact;
+import open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact.response.OperationId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
 
 /**
  * REST Controller the provides the Contact related commands.
@@ -40,19 +43,33 @@ public class ContactController extends CommandController {
    * @param createContact the create contact command
    */
   @RequestMapping(method = RequestMethod.POST, path = CreateContact.URI)
-  public ResponseEntity<UUID> createContact(
+  public ResponseEntity<OperationId> createContact(
       @RequestBody(required = true) CreateContact createContact) {
 
-    return Mono
-        .just(createContact)
-        .map(CreateContact::getId)
-        .map(usedKeyService::validateKeyIsNotUsed)
-        .map(keyOptional -> keyOptional.orElseThrow(RuntimeException::new))
-        .doOnNext(usedKeyService::markKeyAsUsed)
-        .map(ContactCreated::new)
-        .doOnNext(eventSource::accept)
-        .map(Event::getEventId)
-        .map(ResponseEntity.accepted()::body)
-        .block(Duration.ZERO);
+    try {
+      Event contactCreated =
+          new ContactCreated(
+              Optional.ofNullable(createContact)
+                  .map(CreateContact::getId)
+                  .map(usedKeyService::validateKeyIsNotUsed)
+                  .map(optionalKey ->
+                      optionalKey.orElseThrow(DuplicateKeyException::duplicateContactId))
+                  .orElseThrow(NoKeyException::noContactId));
+
+      usedKeyService.markKeyAsUsed(createContact.getId());
+      eventSource.accept(contactCreated);
+
+      return ResponseEntity
+          .accepted()
+          .body(OperationId
+              .builder()
+              .operationId(contactCreated.getEventId())
+              .build());
+    } catch(ServerRuntimeException ex) {
+      throw ex;
+    } catch (Exception ex) {
+      throw new InternalServerError("Error processing the command >CreateContact<. " +
+          "Please contact the administrator.", ex);
+    }
   }
 }

@@ -17,7 +17,7 @@
 package open.schoolmanagement.contacts.importantcontactsservice.config;
 
 import open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.PingController;
-import open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact.commands.CreateContact;
+import open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact.command.CreateContact;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

@@ -17,7 +17,7 @@
 --
 -- Event Sourcing Tables
 --
-CREATE TABLE usedKey (
+CREATE TABLE used_key (
     id VARCHAR(36) NOT NULL,
     PRIMARY KEY (`id`)
 );

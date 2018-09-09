@@ -16,14 +16,17 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.model;
 
+import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
@@ -34,9 +37,11 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(of = "key")
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "usedKey")
-public class UsedKey {
+@Table(name = "used_key")
+public class UsedKey implements Serializable {
   /**
    * The key.
    */

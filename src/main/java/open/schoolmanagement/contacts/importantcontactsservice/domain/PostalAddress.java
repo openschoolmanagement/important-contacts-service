@@ -16,6 +16,7 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
+import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,8 +37,8 @@ import lombok.ToString;
 @EqualsAndHashCode(of = "id")
 @Builder
 @Entity
-@Table(name = "postalAddress")
-public class PostalAddress {
+@Table(name = "postal_address")
+public class PostalAddress implements Serializable {
   /**
    * The address id.
    */
@@ -86,7 +87,7 @@ public class PostalAddress {
    */
   @Getter
   @Setter
-  @Column(name = "postalCode")
+  @Column(name = "postal_code")
   private String postalCode;
 
   /**
@@ -102,7 +103,7 @@ public class PostalAddress {
    */
   @Getter
   @Setter
-  @Column(name = "isoCountryCode")
+  @Column(name = "iso_country_code")
   private String isoCountryCode;
 
   /**

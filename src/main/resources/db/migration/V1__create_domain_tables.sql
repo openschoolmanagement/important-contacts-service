@@ -21,43 +21,43 @@ CREATE TABLE contact (
     id              VARCHAR(36) NOT NULL,
     organization    TEXT CHARACTER SET utf8 NULL,
     salutation      TEXT CHARACTER SET utf8 NULL,
-    academicTitle   TEXT CHARACTER SET utf8 NULL,
-    givenName       TEXT CHARACTER SET utf8 NULL,
-    middleNames     TEXT CHARACTER SET utf8 NULL,
-    lastName        TEXT CHARACTER SET utf8 NULL,
+    academic_title   TEXT CHARACTER SET utf8 NULL,
+    given_name       TEXT CHARACTER SET utf8 NULL,
+    middle_names     TEXT CHARACTER SET utf8 NULL,
+    last_name        TEXT CHARACTER SET utf8 NULL,
     notes           TEXT CHARACTER SET utf8 NULL,
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE emailAddress (
+CREATE TABLE email_address (
     id              VARCHAR(36) NOT NULL,
     label           TEXT CHARACTER SET utf8 NULL,
     email           TEXT CHARACTER SET utf8 NULL,
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE labeledDate (
+CREATE TABLE labeled_date (
     id              VARCHAR(36) NOT NULL,
     label           TEXT CHARACTER SET utf8 NULL,
-    dateValue       DATE NULL,
+    date_value       DATE NULL,
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE phoneNumber (
+CREATE TABLE phone_number (
     id              VARCHAR(36) NOT NULL,
     label           TEXT CHARACTER SET utf8 NULL,
-    phoneNumber     TEXT CHARACTER SET utf8 NULL,
+    phone_number     TEXT CHARACTER SET utf8 NULL,
     PRIMARY KEY (`id`)
 );
 
-CREATE TABLE postalAddress (
+CREATE TABLE postal_address (
     id              VARCHAR(36) NOT NULL,
     label           TEXT CHARACTER SET utf8 NULL,
     street          TEXT CHARACTER SET utf8 NULL,
     city            TEXT CHARACTER SET utf8 NULL,
     state           TEXT CHARACTER SET utf8 NULL,
-    postalCode      TEXT CHARACTER SET utf8 NULL,
+    postal_code      TEXT CHARACTER SET utf8 NULL,
     country         TEXT CHARACTER SET utf8 NULL,
-    isoCountryCode  TEXT CHARACTER SET utf8 NULL,
+    iso_country_code  TEXT CHARACTER SET utf8 NULL,
     PRIMARY KEY (`id`)
 );

@@ -14,7 +14,7 @@
    limitations under the License.
  */
 
-package open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact.commands;
+package open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact.command;
 
 import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.API_V1_IMPORTANT_CONTACTS_URI;
 import static open.schoolmanagement.contacts.importantcontactsservice.config.Constants.WRITE_URI;
