@@ -14,28 +14,18 @@
    limitations under the License.
  */
 
-package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events;
+package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service;
 
-import java.util.UUID;
-import lombok.Getter;
-import lombok.Setter;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.Event;
 
 /**
- * The event 'ContactCreated'
+ * This declares the interface for the event sink.
  */
-public class ContactCreated extends Event {
-  private static final String AGGREGATE = "Contact";
-
-  @Getter
-  @Setter
-  private UUID id;
-
+public interface EventSink {
   /**
-   * Initialize the event.
+   * Accept and process an event.
+   *
+   * @param event the event that shall be processed
    */
-  public ContactCreated(UUID id) {
-    super(Type.Create, AGGREGATE, id);
-
-    this.id = id;
-  }
+  void accept(Event event);
 }

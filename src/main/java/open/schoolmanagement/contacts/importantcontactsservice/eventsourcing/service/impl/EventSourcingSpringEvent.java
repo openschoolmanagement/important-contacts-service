@@ -14,7 +14,18 @@
    limitations under the License.
  */
 
-/**
- * This package contains the domain model for the service.
- */
-package open.schoolmanagement.contacts.importantcontactsservice.domain;
+package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.impl;
+
+import lombok.Getter;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.Event;
+import org.springframework.context.ApplicationEvent;
+
+class EventSourcingSpringEvent extends ApplicationEvent {
+  @Getter
+  private Event event;
+
+  public EventSourcingSpringEvent(Object source, Event event) {
+    super(source);
+    this.event = event;
+  }
+}

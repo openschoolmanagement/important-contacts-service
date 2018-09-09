@@ -14,28 +14,33 @@
    limitations under the License.
  */
 
-package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events;
+package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service;
 
 import java.util.UUID;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
- * The event 'ContactCreated'
+ * This service is providing the logic to check, save and delete used keys.
  */
-public class ContactCreated extends Event {
-  private static final String AGGREGATE = "Contact";
-
-  @Getter
-  @Setter
-  private UUID id;
+public interface UsedKeyService {
+  /**
+   * Validates whether a key is used or not.
+   *
+   * @param key the key to validate
+   * @return true if the key is not used, otherwise false
+   */
+  boolean validateKeyIsNotUsed(UUID key);
 
   /**
-   * Initialize the event.
+   * Mark the given key as used.
+   *
+   * @param key the key to be marked as used
    */
-  public ContactCreated(UUID id) {
-    super(Type.Create, AGGREGATE, id);
+  void markKeyAsUsed(UUID key);
 
-    this.id = id;
-  }
+  /**
+   * Mark the given key as not used.
+   *
+   * @param key the key to be marked as not used
+   */
+  void markKeyAsNotUsed(UUID key);
 }

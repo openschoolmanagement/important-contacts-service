@@ -14,7 +14,14 @@
    limitations under the License.
  */
 
+package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.repository;
+
+import java.util.UUID;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.model.UsedKey;
+import org.springframework.data.repository.CrudRepository;
+
 /**
- * This package contains the model for the event sourcing implementation.
+ * This repository is used to handle used keys for the event sourcing.
  */
-package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.model;
+public interface UsedKeyRepository extends CrudRepository<UsedKey, UUID> {
+}

@@ -14,7 +14,17 @@
    limitations under the License.
  */
 
+package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service;
+
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.Event;
+
 /**
- * This package contains events for the event sourcing implementation.
+ * The is the event sink that receives all the events.
  */
-package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events;
+public interface EventSource {
+  /**
+   * Receive an event that shall be send.
+   * @param event
+   */
+  public void accept(Event event);
+}
