@@ -17,7 +17,6 @@
 package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.impl;
 
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.Event;
-import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.model.EventProcessingResult;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.EventProcessingResultService;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.EventSink;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,13 +35,6 @@ class EventSinkImpl implements ApplicationListener<EventSourcingSpringEvent>, Ev
   @Override
   public void accept(Event event) {
     // TODO save event and process aggregate for read layer
-    eventProcessingResultService.addEventProcessingResult(
-        event.getEventId(),
-        EventProcessingResult
-            .builder()
-            .eventId(event.getEventId())
-            .successful(true)
-            .message("Test").build());
   }
 
   @Override
