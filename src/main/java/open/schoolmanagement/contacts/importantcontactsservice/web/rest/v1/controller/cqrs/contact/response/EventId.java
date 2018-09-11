@@ -25,8 +25,8 @@ import lombok.Setter;
  * Response body that holds an operation id.
  */
 @Builder
-public class OperationId {
+public class EventId {
   @Getter
   @Setter
-  private UUID operationId;
+  private UUID eventId;
 }

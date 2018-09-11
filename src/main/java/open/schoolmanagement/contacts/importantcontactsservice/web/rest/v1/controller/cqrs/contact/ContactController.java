@@ -24,7 +24,7 @@ import open.schoolmanagement.contacts.importantcontactsservice.web.rest.exceptio
 import open.schoolmanagement.contacts.importantcontactsservice.web.rest.exception.NoKeyException;
 import open.schoolmanagement.contacts.importantcontactsservice.web.rest.exception.ServerRuntimeException;
 import open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact.command.CreateContact;
-import open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact.response.OperationId;
+import open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact.response.EventId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +43,7 @@ public class ContactController extends CommandController {
    * @param createContact the create contact command
    */
   @RequestMapping(method = RequestMethod.POST, path = CreateContact.URI)
-  public ResponseEntity<OperationId> createContact(
+  public ResponseEntity<EventId> createContact(
       @RequestBody(required = true) CreateContact createContact) {
 
     try {
@@ -61,9 +61,9 @@ public class ContactController extends CommandController {
 
       return ResponseEntity
           .accepted()
-          .body(OperationId
+          .body(EventId
               .builder()
-              .operationId(contactCreated.getEventId())
+              .eventId(contactCreated.getEventId())
               .build());
     } catch(ServerRuntimeException ex) {
       throw ex;
