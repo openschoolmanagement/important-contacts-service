@@ -17,6 +17,7 @@
 package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
 import lombok.Getter;
@@ -32,7 +33,7 @@ public abstract class Event {
 
   @Getter
   @JsonIgnore
-  private Date eventDate;
+  private Timestamp eventSentAt;
 
   @Getter
   @JsonIgnore
@@ -55,7 +56,7 @@ public abstract class Event {
    */
   public Event(Type eventType, String aggregate, UUID aggregateId) {
       this.eventType = eventType;
-      this.eventDate = new Date();
+      this.eventSentAt = new Timestamp(new Date().getTime());
       this.eventId = UUID.randomUUID();
       this.aggregate = aggregate;
       this.aggregateId = aggregateId;

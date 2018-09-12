@@ -40,8 +40,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "used_key")
-public class UsedKey implements Serializable {
+@Table(name = "streamed_key")
+public class StreamedKey implements Serializable {
   /**
    * The key.
    */

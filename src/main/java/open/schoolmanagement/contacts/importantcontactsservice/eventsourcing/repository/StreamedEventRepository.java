@@ -14,16 +14,14 @@
    limitations under the License.
  */
 
-package open.schoolmanagement.contacts.importantcontactsservice.web.rest.v1.controller.cqrs.contact;
+package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.repository;
 
-import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.EventSource;
-import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.StreamedKeyService;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.UUID;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.model.StreamedEvent;
+import org.springframework.data.repository.CrudRepository;
 
-abstract class CommandController {
-  @Autowired
-  protected StreamedKeyService streamedKeyService;
-
-  @Autowired
-  protected EventSource eventSource;
+/**
+ * This repository is used to handle events for the event sourcing.
+ */
+public interface StreamedEventRepository extends CrudRepository<StreamedEvent, UUID> {
 }

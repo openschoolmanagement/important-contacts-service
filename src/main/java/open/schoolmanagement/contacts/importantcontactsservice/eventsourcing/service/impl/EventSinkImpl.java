@@ -17,6 +17,7 @@
 package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.impl;
 
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.Event;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.repository.StreamedEventRepository;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.EventProcessingResultService;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.EventSink;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +26,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 class EventSinkImpl implements ApplicationListener<EventSourcingSpringEvent>, EventSink {
-  private EventProcessingResultService eventProcessingResultService;
+  private final EventProcessingResultService eventProcessingResultService;
+  private final StreamedEventRepository streamedEventRepository;
 
   @Autowired
-  EventSinkImpl(EventProcessingResultService eventProcessingResultService) {
+  EventSinkImpl(EventProcessingResultService eventProcessingResultService,
+      StreamedEventRepository streamedEventRepository) {
+
     this.eventProcessingResultService = eventProcessingResultService;
+    this.streamedEventRepository = streamedEventRepository;
   }
 
   @Override

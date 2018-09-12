@@ -51,12 +51,12 @@ public class ContactController extends CommandController {
           new ContactCreated(
               Optional.ofNullable(createContact)
                   .map(CreateContact::getId)
-                  .map(usedKeyService::validateKeyIsNotUsed)
+                  .map(streamedKeyService::validateKeyIsNotUsed)
                   .map(optionalKey ->
                       optionalKey.orElseThrow(DuplicateKeyException::duplicateContactId))
                   .orElseThrow(NoKeyException::noContactId));
 
-      usedKeyService.markKeyAsUsed(createContact.getId());
+      streamedKeyService.markKeyAsUsed(createContact.getId());
       eventSource.accept(contactCreated);
 
       return ResponseEntity

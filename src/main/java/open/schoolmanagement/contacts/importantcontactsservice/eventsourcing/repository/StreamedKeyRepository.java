@@ -17,11 +17,11 @@
 package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.repository;
 
 import java.util.UUID;
-import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.model.UsedKey;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.model.StreamedKey;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  * This repository is used to handle used keys for the event sourcing.
  */
-public interface UsedKeyRepository extends CrudRepository<UsedKey, UUID> {
+public interface StreamedKeyRepository extends CrudRepository<StreamedKey, UUID> {
 }

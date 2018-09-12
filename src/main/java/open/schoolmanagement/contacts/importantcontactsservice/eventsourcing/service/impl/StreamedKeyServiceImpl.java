@@ -18,21 +18,21 @@ package open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.se
 
 import java.util.Optional;
 import java.util.UUID;
-import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.model.UsedKey;
-import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.repository.UsedKeyRepository;
-import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.UsedKeyService;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.model.StreamedKey;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.repository.StreamedKeyRepository;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.StreamedKeyService;
 import org.springframework.stereotype.Service;
 
 /**
  * Implementation of the UsedKeyService.
  */
 @Service
-class UsedKeyServiceImpl implements UsedKeyService {
-  private final UsedKeyRepository usedKeyRepository;
+class StreamedKeyServiceImpl implements StreamedKeyService {
+  private final StreamedKeyRepository usedKeyRepository;
 
   private Object lockObject = new Object();
 
-  UsedKeyServiceImpl(UsedKeyRepository usedKeyRepository) {
+  StreamedKeyServiceImpl(StreamedKeyRepository usedKeyRepository) {
     this.usedKeyRepository = usedKeyRepository;
   }
 
@@ -48,7 +48,7 @@ class UsedKeyServiceImpl implements UsedKeyService {
     synchronized (lockObject) {
       usedKeyRepository
           .save(
-              UsedKey
+              StreamedKey
                   .builder()
                   .key(key)
                   .build());
@@ -60,7 +60,7 @@ class UsedKeyServiceImpl implements UsedKeyService {
     synchronized (lockObject) {
       usedKeyRepository
           .delete(
-              UsedKey
+              StreamedKey
                   .builder()
                   .key(key)
                   .build());
