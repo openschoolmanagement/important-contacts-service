@@ -14,11 +14,20 @@
    limitations under the License.
  */
 
-package open.schoolmanagement.contacts.importantcontactsservice.persistence;
+package open.schoolmanagement.contacts.importantcontactsservice.persistence.service;
 
-import java.util.UUID;
-import open.schoolmanagement.contacts.importantcontactsservice.domain.PhoneNumber;
-import org.springframework.data.repository.CrudRepository;
+import java.util.Optional;
+import open.schoolmanagement.contacts.importantcontactsservice.domain.Contact;
 
-public interface PhoneNumberRepository extends CrudRepository<PhoneNumber, UUID> {
+/**
+ * This abstract class declares methods for persisting contacts.
+ */
+public abstract class PersistContactService extends PersistDomainObjectService {
+  /**
+   * Save a contact.
+   *
+   * @param contact the contact to be saved
+   * @return An optional with the contact, or an empty optional in case of an error.
+   */
+  public abstract Optional<Contact> save(Contact contact);
 }

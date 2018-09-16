@@ -14,11 +14,17 @@
    limitations under the License.
  */
 
-package open.schoolmanagement.contacts.importantcontactsservice.persistence;
+package open.schoolmanagement.contacts.importantcontactsservice.persistence.service;
 
-import java.util.UUID;
-import open.schoolmanagement.contacts.importantcontactsservice.domain.PostalAddress;
-import org.springframework.data.repository.CrudRepository;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.Event;
 
-public interface PostalAddressRepository extends CrudRepository<PostalAddress, UUID> {
+/**
+ * This is the base abstract class for persisting domain objects.
+ */
+public abstract class PersistDomainObjectService {
+  /**
+   * Persist a domain object from an event.
+   * @param event the event
+   */
+  public abstract void persistDomainObjectFromEvent(Event event);
 }

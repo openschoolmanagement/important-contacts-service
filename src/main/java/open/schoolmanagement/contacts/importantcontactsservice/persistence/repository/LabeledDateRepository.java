@@ -14,11 +14,11 @@
    limitations under the License.
  */
 
-package open.schoolmanagement.contacts.importantcontactsservice.persistence;
+package open.schoolmanagement.contacts.importantcontactsservice.persistence.repository;
 
 import java.util.UUID;
-import open.schoolmanagement.contacts.importantcontactsservice.domain.Contact;
+import open.schoolmanagement.contacts.importantcontactsservice.domain.LabeledDate;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ContactRepository extends CrudRepository<Contact, UUID> {
+public interface LabeledDateRepository extends CrudRepository<LabeledDate, UUID> {
 }

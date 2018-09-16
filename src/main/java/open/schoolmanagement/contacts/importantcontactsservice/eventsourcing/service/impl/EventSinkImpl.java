@@ -25,6 +25,7 @@ import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.mod
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.repository.StreamedEventRepository;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.EventProcessingResultService;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.service.EventSink;
+import open.schoolmanagement.contacts.importantcontactsservice.persistence.service.PersistDomainObjectService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +40,18 @@ class EventSinkImpl implements ApplicationListener<EventSourcingSpringEvent>, Ev
   private final StreamedEventRepository streamedEventRepository;
   private final TransactionManager transactionManager;
 
+  private final PersistDomainObjectService persistDomainObjectService;
+
   @Autowired
   EventSinkImpl(EventProcessingResultService eventProcessingResultService,
       StreamedEventRepository streamedEventRepository,
-      TransactionManager transactionManager) {
+      TransactionManager transactionManager,
+      PersistDomainObjectService persistDomainObjectService) {
 
     this.eventProcessingResultService = eventProcessingResultService;
     this.streamedEventRepository = streamedEventRepository;
     this.transactionManager = transactionManager;
+    this.persistDomainObjectService = persistDomainObjectService;
   }
 
   @Override
@@ -84,7 +89,7 @@ class EventSinkImpl implements ApplicationListener<EventSourcingSpringEvent>, Ev
   private void updateReadModel(Event event) {
     Transaction ta = transactionManager.begin();
 
-    // TODO
+    persistDomainObjectService.persistDomainObjectFromEvent(event);
 
     transactionManager.commit(ta);
   }
