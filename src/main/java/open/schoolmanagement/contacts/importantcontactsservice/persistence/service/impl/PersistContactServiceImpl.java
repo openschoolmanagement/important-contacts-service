@@ -16,21 +16,45 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.persistence.service.impl;
 
-import java.util.Optional;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Collections;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import open.schoolmanagement.contacts.importantcontactsservice.domain.BaseEntity;
 import open.schoolmanagement.contacts.importantcontactsservice.domain.Contact;
+import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.ContactCreated;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.Event;
+import open.schoolmanagement.contacts.importantcontactsservice.persistence.repository.ContactRepository;
 import open.schoolmanagement.contacts.importantcontactsservice.persistence.service.PersistContactService;
 import org.springframework.stereotype.Service;
 
 @Service("persistContactService")
 class PersistContactServiceImpl extends PersistContactService {
-  @Override
-  public Optional<Contact> save(Contact contact) {
-    return Optional.empty();
+  private final ContactRepository contactRepository;
+  private final Map<Class<? extends Event>, Function<Event, Contact>> dispatcherMap;
+
+  PersistContactServiceImpl(ContactRepository contactRepository) {
+    this.contactRepository = contactRepository;
+
+    dispatcherMap = Collections.unmodifiableMap(
+        Stream
+            .of(
+                new SimpleEntry<Class<? extends Event>, Function<Event, Contact>>(
+                    ContactCreated.class, this::createContact))
+            .collect(Collectors.toMap((e) -> e.getKey(), (e) -> e.getValue())));
   }
 
   @Override
-  public void persistDomainObjectFromEvent(Event event) {
+  public BaseEntity persistDomainObjectFromEvent(Event event) {
+    return dispatcherMap.get(event.getClass()).apply(event);
+  }
 
+  Contact createContact(Event event) {
+    ContactCreated contactCreatedEvent = ContactCreated.class.cast(event);
+    Contact contact = Contact.builder().id(event.getAggregateId()).build();
+
+    return contactRepository.save(contact);
   }
 }

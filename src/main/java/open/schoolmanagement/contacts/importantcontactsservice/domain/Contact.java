@@ -16,7 +16,6 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -40,11 +39,11 @@ import org.hibernate.annotations.FetchMode;
  * A Contact. This is a transient entity.
  */
 @ToString
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", callSuper = false)
 @Builder
 @Entity
 @Table(name = "contact")
-public class Contact implements Serializable {
+public class Contact extends BaseEntity {
   /**
    * The contact id.
    */

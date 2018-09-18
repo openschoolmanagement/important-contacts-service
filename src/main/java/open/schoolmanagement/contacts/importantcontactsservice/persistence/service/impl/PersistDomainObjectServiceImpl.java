@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import open.schoolmanagement.contacts.importantcontactsservice.domain.BaseEntity;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.ContactCreated;
 import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.Event;
 import open.schoolmanagement.contacts.importantcontactsservice.persistence.service.PersistContactService;
@@ -44,7 +45,7 @@ class PersistDomainObjectServiceImpl extends PersistDomainObjectService {
   }
 
   @Override
-  public void persistDomainObjectFromEvent(Event event) {
-    dispatcherMap.get(event.getClass()).persistDomainObjectFromEvent(event);
+  public BaseEntity persistDomainObjectFromEvent(Event event) {
+    return dispatcherMap.get(event.getClass()).persistDomainObjectFromEvent(event);
   }
 }

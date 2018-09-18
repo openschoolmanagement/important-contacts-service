@@ -16,7 +16,6 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
-import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,11 +33,11 @@ import lombok.ToString;
  * A postal address. This is a transient entity.
  */
 @ToString
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", callSuper = false)
 @Builder
 @Entity
 @Table(name = "postal_address")
-public class PostalAddress implements Serializable {
+public class PostalAddress extends BaseEntity {
   /**
    * The address id.
    */

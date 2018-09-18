@@ -14,18 +14,22 @@
    limitations under the License.
  */
 
-package open.schoolmanagement.contacts.importantcontactsservice.persistence.service;
+package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
-import open.schoolmanagement.contacts.importantcontactsservice.domain.BaseEntity;
-import open.schoolmanagement.contacts.importantcontactsservice.eventsourcing.events.Event;
+import java.io.Serializable;
 
 /**
- * This is the base abstract class for persisting domain objects.
+ * The base entity.
  */
-public abstract class PersistDomainObjectService {
+public class BaseEntity implements Serializable {
+
   /**
-   * Persist a domain object from an event.
-   * @param event the event
+   * Cast the base entity to a specific type.
+   *
+   * @param <E> The target type
+   * @return the casted base entity.
    */
-  public abstract BaseEntity persistDomainObjectFromEvent(Event event);
+  public <E> E cast() {
+    return (E)this;
+  }
 }

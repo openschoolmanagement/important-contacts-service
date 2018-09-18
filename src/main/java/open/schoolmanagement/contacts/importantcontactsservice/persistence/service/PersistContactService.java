@@ -16,18 +16,9 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.persistence.service;
 
-import java.util.Optional;
-import open.schoolmanagement.contacts.importantcontactsservice.domain.Contact;
-
 /**
  * This abstract class declares methods for persisting contacts.
  */
 public abstract class PersistContactService extends PersistDomainObjectService {
-  /**
-   * Save a contact.
-   *
-   * @param contact the contact to be saved
-   * @return An optional with the contact, or an empty optional in case of an error.
-   */
-  public abstract Optional<Contact> save(Contact contact);
+
 }

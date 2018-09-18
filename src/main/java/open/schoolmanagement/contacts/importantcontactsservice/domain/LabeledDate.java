@@ -16,7 +16,6 @@
 
 package open.schoolmanagement.contacts.importantcontactsservice.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -35,11 +34,11 @@ import lombok.ToString;
  * A date. This is a transient entity.
  */
 @ToString
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id", callSuper = false)
 @Builder
 @Entity
 @Table(name = "labeled_date")
-public class LabeledDate implements Serializable {
+public class LabeledDate extends BaseEntity {
   /**
    * The date id.
    */
